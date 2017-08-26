@@ -1,5 +1,7 @@
 # NEM Transaction Monitor
 
+Java library for monitoring transactions in NEM Blockchain platform
+
 <h2>Usage</h2>
 
 Simply run your Java code with the following.
@@ -19,18 +21,14 @@ You can create your own handler to handle the incoming payload properly.
 
 ```java
 public class CustomTransactionMonitor implements StompFrameHandler {
-
 	@Override
 	public Type getPayloadType(StompHeaders headers) {
 		return String.class;
 	}
-
 	@Override
 	public void handleFrame(StompHeaders headers, Object payload) {
 		System.out.println(payload.toString()); // handle the payload.
-		
 	}
-
 }
 ```
 
