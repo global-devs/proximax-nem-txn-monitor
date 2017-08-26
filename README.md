@@ -38,4 +38,9 @@ WsNemTransactionMonitor.networkName("mijinnet").host("a1.nem.foundation").port("
 	.subscribe(io.nem.utils.Constants.URL_WS_TRANSACTIONS, new CustomTransactionMonitor())
 	.monitor();
 ```
+
+<h2>Monitor and Handle Transactions</h2>
+TBD
+<h2>Monitor and Handle MultisigTransaction</h2>
+TBD
 <sub>Copyright (c) 2017</sub>
