@@ -15,6 +15,7 @@ import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
 import io.nem.model.ChannelHandleModel;
+import io.nem.monitor.handler.TransactionMonitorHandler;
 import io.nem.monitor.handler.WsMonitorImcomingHandler;
 import io.nem.utils.DefaultSetting;
 import io.nem.utils.ScannerUtil;
@@ -44,7 +45,7 @@ public class WsNemTransactionMonitor {
 	}
 	
 	public interface IChannel {
-		IChannel subscribe(String channel,StompFrameHandler handler);
+		IChannel subscribe(String channel,TransactionMonitorHandler handler);
 		void monitor();
 	}
 	
@@ -65,7 +66,8 @@ public class WsNemTransactionMonitor {
 		}
 
 		@Override
-		public IChannel subscribe(String channel, StompFrameHandler handler) {
+		public IChannel subscribe(String channel, TransactionMonitorHandler handler) {
+			handler.setAddress(this.address);
 			this.channelHandleList.add(new ChannelHandleModel(channel,this.address,handler));
 			return this;
 		}

@@ -54,26 +54,7 @@ public class WsMonitorImcomingHandler implements StompSessionHandler {
 		for(ChannelHandleModel channelHandleModel: this.channelHandleModels) {
 			session.subscribe(channelHandleModel.getChannel() + "/" + this.address, channelHandleModel.getFrameHandler());
 		}
-//		
-//		session.subscribe(io.nem.utils.Constants.URL_WS_TRANSACTIONS + "/" + this.address, new StompFrameHandler() {
-//			public Type getPayloadType(StompHeaders stompHeaders) {
-//				return String.class;
-//	        }
-//	        public void handleFrame(StompHeaders stompHeaders, Object result) {
-//	        	System.out.println("handleFrame1");
-//	        	System.out.println(result.toString());
-//	        }
-//		});
-//		session.subscribe("/unconfirmed/" + this.address, new StompFrameHandler() {
-//			public Type getPayloadType(StompHeaders stompHeaders) {
-//				return String.class;
-//	        }
-//	        public void handleFrame(StompHeaders stompHeaders, Object result) {
-//	        	System.out.println("handleFrame2");
-//	        	
-//	        	System.out.println(result.toString());
-//	        }
-//		});
+
 
 	}
 

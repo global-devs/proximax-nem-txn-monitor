@@ -1,6 +1,6 @@
 package io.nem.monitor;
 
-import io.nem.monitor.handler.TransactionMonitor;
+import io.nem.monitor.handler.TransactionMonitorHandler;
 
 public class MonitorIncomingTransaction {
 
@@ -8,8 +8,8 @@ public class MonitorIncomingTransaction {
 
 		WsNemTransactionMonitor.networkName("mijinnet").host("a1.nem.foundation").port("7895").wsPort("7778")
 				.addressToMonitor("MDYSYWVWGC6JDD7BGE4JBZMUEM5KXDZ7J77U4X2Y")
-				.subscribe(io.nem.utils.Constants.URL_WS_TRANSACTIONS, new TransactionMonitor())
-				.subscribe(io.nem.utils.Constants.URL_WS_UNCONFIRMED, new TransactionMonitor())
+				.subscribe(io.nem.utils.Constants.URL_WS_TRANSACTIONS, new TransactionMonitorHandler())
+				.subscribe(io.nem.utils.Constants.URL_WS_UNCONFIRMED, new TransactionMonitorHandler())
 				.monitor();
 	}
 }

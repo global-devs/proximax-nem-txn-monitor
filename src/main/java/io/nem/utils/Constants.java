@@ -1,10 +1,5 @@
 package io.nem.utils;
 
-/** 
- * @Description: some contants
- * @author lu
- * @date 2017.03.07
- */ 
 public class Constants {
 
 	public static final String NETWORK_NAME = "mijinnet"; //testnet, mainnet, mijinnet

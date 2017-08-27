@@ -2,11 +2,7 @@ package io.nem.utils;
 
 import java.util.Scanner;
 
-/** 
- * @Description: Scanner utils
- * @author lu
- * @date 2017.03.24
- */ 
+
 public class ScannerUtil {
 
 	/**
