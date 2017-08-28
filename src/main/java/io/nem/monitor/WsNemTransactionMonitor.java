@@ -24,6 +24,10 @@ public class WsNemTransactionMonitor {
 	
 	private WsNemTransactionMonitor() {}
 	
+	public static INetworkName init(){
+		return new WsNemTransactionMonitor.Builder();
+	}
+	
 	public static INetworkName networkName(String name){
 		return new WsNemTransactionMonitor.Builder(name);
 	}
@@ -59,6 +63,8 @@ public class WsNemTransactionMonitor {
 		
 		private List<ChannelHandleModel> channelHandleList = new ArrayList<ChannelHandleModel>();
 		
+		public Builder() {
+		}
 		
 		public Builder(String name) {
 			this.networkName = name;
