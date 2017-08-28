@@ -20,7 +20,7 @@ WsNemTransactionMonitor.networkName("mijinnet").host("a1.nem.foundation").port("
 You can create your own handler to handle the incoming payload. 
 
 ```java
-public class CustomTransactionMonitor implements StompFrameHandler {
+public class CustomTransactionMonitor implements TransactionMonitorHandler {
 	@Override
 	public Type getPayloadType(StompHeaders headers) {
 		return String.class;
