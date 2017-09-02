@@ -1,4 +1,4 @@
-package io.nem.monitor.handler;
+package io.nem.monitor;
 
 import java.lang.reflect.Type;
 import java.text.DateFormat;
@@ -19,15 +19,15 @@ import org.springframework.messaging.simp.stomp.StompSessionHandler;
 
 import io.nem.model.ChannelHandleModel;
 
-public class WsMonitorImcomingHandler implements StompSessionHandler {
+public class WsMonitorImcomingSessionHandler implements StompSessionHandler {
 
 	private String address = null;
 	private List<ChannelHandleModel> channelHandleModels;
-	public WsMonitorImcomingHandler(String address) {
+	public WsMonitorImcomingSessionHandler(String address) {
 		this.address = address;
 	}
 	
-	public WsMonitorImcomingHandler(String address, List<ChannelHandleModel> channelHandleModels) {
+	public WsMonitorImcomingSessionHandler(String address, List<ChannelHandleModel> channelHandleModels) {
 		this.address = address;
 		this.channelHandleModels = channelHandleModels;
 	}

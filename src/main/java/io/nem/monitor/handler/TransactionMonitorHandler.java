@@ -35,7 +35,6 @@ public class TransactionMonitorHandler implements StompFrameHandler {
 
 	@Override
 	public void handleFrame(StompHeaders headers, Object payload) {
-		System.out.println(">>>");
 		monitor(address, payload.toString());
 		
 	}

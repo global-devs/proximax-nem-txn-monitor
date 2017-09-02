@@ -16,7 +16,6 @@ import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
 import io.nem.model.ChannelHandleModel;
 import io.nem.monitor.handler.TransactionMonitorHandler;
-import io.nem.monitor.handler.WsMonitorImcomingHandler;
 import io.nem.utils.DefaultSetting;
 import io.nem.utils.ScannerUtil;
 
@@ -89,7 +88,7 @@ public class WsNemTransactionMonitor {
 			WebSocketClient transport = new SockJsClient(transports);
 			WebSocketStompClient stompClient = new WebSocketStompClient(transport);
 			stompClient.setMessageConverter(new StringMessageConverter());
-			StompSessionHandler handler = new WsMonitorImcomingHandler(address,this.channelHandleList);
+			StompSessionHandler handler = new WsMonitorImcomingSessionHandler(address,this.channelHandleList);
 			stompClient.connect(WS_URI, handler);
 			//block and monitor exit action
 			ScannerUtil.monitorExit();
