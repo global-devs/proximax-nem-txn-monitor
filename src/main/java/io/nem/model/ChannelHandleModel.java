@@ -8,7 +8,6 @@ public class ChannelHandleModel {
 	private StompFrameHandler frameHandler;
 	
 	public ChannelHandleModel() {
-		// TODO Auto-generated constructor stub
 	}
 	
 	public ChannelHandleModel(String channel, String address, StompFrameHandler frameHandler) {
