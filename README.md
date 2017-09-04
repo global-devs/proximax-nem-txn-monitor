@@ -16,6 +16,18 @@ WsNemTransactionMonitor.networkName("mijinnet").host("a1.nem.foundation").port("
 			
 ```
 
+You can also monitor multiple addresses
+
+```java
+
+WsNemTransactionMonitor.networkName("mijinnet").host("a1.nem.foundation").port("7895").wsPort("7778")
+	.addressesToMonitor("MDYSYWVWGC6JDD7BGE4JBZMUEM5KXDZ7J77U4X2Y","MDYSYWVWGC6JDD7BGE4JBZMUED7BGE4JBD") // address to monitor
+	.subscribe(io.nem.utils.Constants.URL_WS_TRANSACTIONS, new TransactionMonitor()) // multiple subscription and a handler
+	.subscribe(io.nem.utils.Constants.URL_WS_UNCONFIRMED, new UnconfirmedTransactionMonitor())
+	.monitor(); // trigger the monitoring process
+			
+```
+
 <h3>Custom Transaction Monitor</h3>
 You can create your own handler to handle the incoming payload. 
 
@@ -38,11 +50,5 @@ WsNemTransactionMonitor.networkName("mijinnet").host("a1.nem.foundation").port("
 	.subscribe(io.nem.utils.Constants.URL_WS_TRANSACTIONS, new CustomTransactionMonitor())
 	.monitor();
 ```
-
-<h2>Monitor and Handle Transactions</h2>
-The library uses Gson/Guava to convert JSON to Java Objects seemlessly. There are built in Java Objects that developers can use for this purpose.
-TBD
-<h2>Monitor and Handle MultisigTransaction</h2>
-TBD
 
 <sub>Copyright (c) 2017</sub>
