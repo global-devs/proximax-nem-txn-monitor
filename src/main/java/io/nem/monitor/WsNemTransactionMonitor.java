@@ -46,7 +46,9 @@ public class WsNemTransactionMonitor {
 
 	public interface IAddress {
 		IChannel addressesToMonitor(List<String> addresses);
+
 		IChannel addressesToMonitor(String... addresses);
+
 		IChannel addressToMonitor(String address);
 	}
 
@@ -77,8 +79,16 @@ public class WsNemTransactionMonitor {
 
 		@Override
 		public IChannel subscribe(String channel, TransactionMonitorHandler handler) {
-			handler.setAddress(this.address);
-			this.channelHandleList.add(new ChannelHandleModel(channel, this.address, handler));
+
+			if (this.addresses != null && !this.addresses.isEmpty()) {
+				for(String address:this.addresses) {
+					handler.setAddress(address);
+					this.channelHandleList.add(new ChannelHandleModel(channel, address, handler));
+				}
+			} else {
+				handler.setAddress(this.address);
+				this.channelHandleList.add(new ChannelHandleModel(channel, this.address, handler));
+			}
 			return this;
 		}
 
@@ -86,7 +96,7 @@ public class WsNemTransactionMonitor {
 		public void monitor() {
 			DefaultSetting.setHostAndPort(this.host, this.port, this.wsPort);
 
-			if (!this.addresses.isEmpty()) {
+			if (this.addresses != null && !this.addresses.isEmpty()) {
 
 				for (String address : this.addresses) {
 					new Thread(new Runnable() {
@@ -150,7 +160,7 @@ public class WsNemTransactionMonitor {
 		@Override
 		public IChannel addressesToMonitor(String... addresses) {
 			this.addresses = new ArrayList<String>();
-			for(String address:addresses) {
+			for (String address : addresses) {
 				this.addresses.add(address);
 			}
 			return this;

@@ -6,7 +6,7 @@ public class MonitorIncomingTransaction {
 	//	Entry
 	public static void main(String[] args) {
 		WsNemTransactionMonitor.networkName("mijinnet").host("a1.dfintech.com").port("7895").wsPort("7778")
-				.addressToMonitor("<address with no dash>")
+				.addressesToMonitor("MAWTL5CF4M3CU5HSFW6QV2VIEITI4Y6D34VSVXU6","MDVJCH6F5FXVUOFCC3PZTSXPQNPCULYQMWEGAOOW")
 				.subscribe(io.nem.utils.Constants.URL_WS_TRANSACTIONS, new TransactionMonitorHandler())
 				.monitor();
 	}
