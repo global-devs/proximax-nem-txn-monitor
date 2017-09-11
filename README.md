@@ -2,6 +2,24 @@
 
 Java library for monitoring transactions in NEM Blockchain platform
 
+<h2>How to build</h2>
+
+```bash
+git clone https://github.com/NEMPH/nem-transaction-monitor.git
+cd nem-transaction-monitor
+mvn clean install
+```
+
+Import it as a maven dependency
+
+```xml
+<dependency>
+    <groupId>io.nem</groupId>
+    <artifactId>nem-transaction-monitor</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+</dependency>
+```
+
 <h2>Usage</h2>
 
 Simply add the following code on your Java Application.

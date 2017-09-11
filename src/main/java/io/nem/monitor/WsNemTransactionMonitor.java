@@ -46,9 +46,7 @@ public class WsNemTransactionMonitor {
 
 	public interface IAddress {
 		IChannel addressesToMonitor(List<String> addresses);
-
 		IChannel addressesToMonitor(String... addresses);
-
 		IChannel addressToMonitor(String address);
 	}
 
@@ -95,9 +93,7 @@ public class WsNemTransactionMonitor {
 		@Override
 		public void monitor() {
 			DefaultSetting.setHostAndPort(this.host, this.port, this.wsPort);
-
 			if (this.addresses != null && !this.addresses.isEmpty()) {
-
 				for (String address : this.addresses) {
 					new Thread(new Runnable() {
 
