@@ -3,7 +3,7 @@ package io.nem.utils;
 public class Constants {
 
 	public static final String NETWORK_NAME = "mijinnet"; //testnet, mainnet, mijinnet
-	public static final long NETWORK_TYPE = 2; //0:testnet, 1:mainnet, 2:mijinnet
+	public static final long NETWORK_TYPE = 1; //0:testnet, 1:mainnet, 2:mijinnet
 	public static final long NEMSISTIME = 1427587585; //the first block time
 	public static final long MICRONEMS_IN_NEM = 1000000;
 	public static final String WEBSOCKET_PORT = "7778";

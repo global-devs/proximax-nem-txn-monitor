@@ -1,13 +1,16 @@
 package io.nem.monitor;
 
-import io.nem.monitor.handler.TransactionMonitorHandler;
+import io.nem.monitor.handler.sample.CustomTransactionMonitorHandler1;
+import io.nem.monitor.handler.sample.TransactionMonitorHandler;
 
 public class MonitorIncomingTransaction {
 
 	public static void main(String[] args) {
-		WsNemTransactionMonitor.networkName("mijinnet").host("a1.dfintech.com").port("7895").wsPort("7778")
-				.addressesToMonitor("MAWTL5CF4M3CU5HSFW6QV2VIEITI4Y6D34VSVXU6","MDVJCH6F5FXVUOFCC3PZTSXPQNPCULYQMWEGAOOW")
+		WsNemTransactionMonitor.networkName("testnet").host("23.228.67.85").port("7890").wsPort("7778")
+				.addressToMonitor("TDZQB4XV6ZQ3X7PXGWYL4KWEY7DY2RGSLIN7PA3F")
 				.subscribe(io.nem.utils.Constants.URL_WS_TRANSACTIONS, new TransactionMonitorHandler())
+				.subscribe(io.nem.utils.Constants.URL_WS_UNCONFIRMED, new CustomTransactionMonitorHandler1())
 				.monitor();
+
 	}
 }

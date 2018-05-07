@@ -50,7 +50,7 @@ WsNemTransactionMonitor.networkName("mijinnet").host("a1.nem.foundation").port("
 You can create your own handler to handle the incoming payload. 
 
 ```java
-public class CustomTransactionMonitor implements TransactionMonitorHandler {
+public class CustomTransactionMonitor extends TransactionMonitorHandler {
 	@Override
 	public Type getPayloadType(StompHeaders headers) {
 		return String.class;
@@ -69,14 +69,5 @@ WsNemTransactionMonitor.networkName("mijinnet").host("a1.nem.foundation").port("
 	.monitor();
 ```
 
-<h2>Support</h2>
-Need help integration your Java Application with NEM.io Platform? I can definitely help you with that, send me a message via 
 
-[telegram](https://web.telegram.org/#/im?p=@brambear)
-
-
-Tips are appreciated but not required. :bowtie: :muscle: :metal:  
-XEM: NA6IT2-ZSTQLT-YO223Z-ZMH2J7-2GVG7G-ZY72FN-47IF  
-BTC: 3JYAYPxN9RL4UvbxMd1svbQynMpFbf5ehy 
-
-<sub>Copyright (c) 2017</sub>
+<sub>Copyright (c) 2018</sub>

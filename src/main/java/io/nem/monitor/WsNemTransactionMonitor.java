@@ -15,7 +15,8 @@ import org.springframework.web.socket.sockjs.client.Transport;
 import org.springframework.web.socket.sockjs.client.WebSocketTransport;
 
 import io.nem.model.ChannelHandleModel;
-import io.nem.monitor.handler.TransactionMonitorHandler;
+import io.nem.monitor.handler.AbstractTransactionMonitorHandler;
+import io.nem.monitor.handler.sample.TransactionMonitorHandler;
 import io.nem.utils.DefaultSetting;
 import io.nem.utils.ScannerUtil;
 
@@ -46,12 +47,14 @@ public class WsNemTransactionMonitor {
 
 	public interface IAddress {
 		IChannel addressesToMonitor(List<String> addresses);
+
 		IChannel addressesToMonitor(String... addresses);
+
 		IChannel addressToMonitor(String address);
 	}
 
 	public interface IChannel {
-		IChannel subscribe(String channel, TransactionMonitorHandler handler);
+		IChannel subscribe(String channel, AbstractTransactionMonitorHandler handler);
 
 		void monitor();
 	}
@@ -63,7 +66,7 @@ public class WsNemTransactionMonitor {
 		private String port;
 		private String wsPort;
 		private String address;
-		private List<String> addresses;
+		private List<String> addresses = new ArrayList<String>();
 
 		private List<ChannelHandleModel> channelHandleList = new ArrayList<ChannelHandleModel>();
 
@@ -76,16 +79,14 @@ public class WsNemTransactionMonitor {
 		}
 
 		@Override
-		public IChannel subscribe(String channel, TransactionMonitorHandler handler) {
-
-			if (this.addresses != null && !this.addresses.isEmpty()) {
-				for(String address:this.addresses) {
-					handler.setAddress(address);
-					this.channelHandleList.add(new ChannelHandleModel(channel, address, handler));
+		public IChannel subscribe(String channel, AbstractTransactionMonitorHandler handler) {
+			if (handler != null) {
+				if (this.addresses != null && !this.addresses.isEmpty()) {
+					for (String address : this.addresses) {
+						handler.setAddress(address);
+						this.channelHandleList.add(new ChannelHandleModel(channel, address, handler));
+					}
 				}
-			} else {
-				handler.setAddress(this.address);
-				this.channelHandleList.add(new ChannelHandleModel(channel, this.address, handler));
 			}
 			return this;
 		}
@@ -94,7 +95,7 @@ public class WsNemTransactionMonitor {
 		public void monitor() {
 			DefaultSetting.setHostAndPort(this.host, this.port, this.wsPort);
 			if (this.addresses != null && !this.addresses.isEmpty()) {
-				for (String address : this.addresses) {
+				for (final String address : this.addresses) {
 					new Thread(new Runnable() {
 
 						@Override
@@ -117,7 +118,7 @@ public class WsNemTransactionMonitor {
 			WebSocketClient transport = new SockJsClient(transports);
 			WebSocketStompClient stompClient = new WebSocketStompClient(transport);
 			stompClient.setMessageConverter(new StringMessageConverter());
-			StompSessionHandler handler = new WsMonitorImcomingSessionHandler(address, this.channelHandleList);
+			StompSessionHandler handler = new WsMonitorIncomingSessionHandler(address, this.channelHandleList);
 			stompClient.connect(WS_URI, handler);
 			// block and monitor exit action
 			ScannerUtil.monitorExit();
@@ -126,6 +127,7 @@ public class WsNemTransactionMonitor {
 		@Override
 		public IChannel addressToMonitor(String address) {
 			this.address = address;
+			this.addresses.add(address);
 			return this;
 		}
 
@@ -155,7 +157,6 @@ public class WsNemTransactionMonitor {
 
 		@Override
 		public IChannel addressesToMonitor(String... addresses) {
-			this.addresses = new ArrayList<String>();
 			for (String address : addresses) {
 				this.addresses.add(address);
 			}

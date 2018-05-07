@@ -18,16 +18,17 @@ import org.springframework.messaging.simp.stomp.StompSession;
 import org.springframework.messaging.simp.stomp.StompSessionHandler;
 
 import io.nem.model.ChannelHandleModel;
+import io.nem.monitor.handler.sample.CustomTransactionMonitorHandler1;
 
-public class WsMonitorImcomingSessionHandler implements StompSessionHandler {
+public class WsMonitorIncomingSessionHandler implements StompSessionHandler {
 
 	private String address = null;
 	private List<ChannelHandleModel> channelHandleModels;
-	public WsMonitorImcomingSessionHandler(String address) {
+	public WsMonitorIncomingSessionHandler(String address) {
 		this.address = address;
 	}
 	
-	public WsMonitorImcomingSessionHandler(String address, List<ChannelHandleModel> channelHandleModels) {
+	public WsMonitorIncomingSessionHandler(String address, List<ChannelHandleModel> channelHandleModels) {
 		this.address = address;
 		this.channelHandleModels = channelHandleModels;
 	}
@@ -55,6 +56,7 @@ public class WsMonitorImcomingSessionHandler implements StompSessionHandler {
 			session.subscribe(channelHandleModel.getChannel() + "/" + this.address, channelHandleModel.getFrameHandler());
 		}
 
+		//session.subscribe("/transactions/"+this.address, new CustomTransactionMonitorHandler1());
 
 	}
 
