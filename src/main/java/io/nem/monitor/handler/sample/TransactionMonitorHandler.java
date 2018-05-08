@@ -22,23 +22,42 @@ import io.nem.utils.NISQuery;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+
+/**
+ * The Class TransactionMonitorHandler.
+ */
 public class TransactionMonitorHandler extends AbstractTransactionMonitorHandler {
 	
 
+	/** The incoming file. */
 	private static File incomingFile = new File("incoming_trans.txt");
+	
+	/** The outgoing file. */
 	private static File outgoingFile = new File("outgoing_trans.txt");
 	
+	/* (non-Javadoc)
+	 * @see org.springframework.messaging.simp.stomp.StompFrameHandler#getPayloadType(org.springframework.messaging.simp.stomp.StompHeaders)
+	 */
 	@Override
 	public Type getPayloadType(StompHeaders headers) {
 		return String.class;
 	}
 
+	/* (non-Javadoc)
+	 * @see org.springframework.messaging.simp.stomp.StompFrameHandler#handleFrame(org.springframework.messaging.simp.stomp.StompHeaders, java.lang.Object)
+	 */
 	@Override
 	public void handleFrame(StompHeaders headers, Object payload) {
 		parse(address, payload.toString());
 		
 	}
 	
+	/**
+	 * Parses the.
+	 *
+	 * @param address the address
+	 * @param result the result
+	 */
 	private void parse(String address, String result) {
 		
 		System.out.println(">>>>");
@@ -165,11 +184,12 @@ public class TransactionMonitorHandler extends AbstractTransactionMonitorHandler
 		
 	
 	}
+	
 	/**
-	 * monitor incoming transactions and output the transactions
-	 * @param address
-	 * @param result
-	 * @return
+	 * monitor incoming transactions and output the transactions.
+	 *
+	 * @param address the address
+	 * @param result the result
 	 */
 	private void monitor(String address, String result){
 		

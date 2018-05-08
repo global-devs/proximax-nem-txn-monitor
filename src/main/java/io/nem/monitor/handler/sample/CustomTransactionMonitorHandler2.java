@@ -11,7 +11,7 @@ import io.nem.monitor.handler.AbstractTransactionMonitorHandler;
 /**
  * The Class CustomTransactionMonitorHandler1.
  */
-public class CustomTransactionMonitorHandler1 extends AbstractTransactionMonitorHandler {
+public class CustomTransactionMonitorHandler2 extends AbstractTransactionMonitorHandler {
 
 
 	/* (non-Javadoc)

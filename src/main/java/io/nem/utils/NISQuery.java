@@ -7,8 +7,18 @@ import org.nem.core.model.primitive.Supply;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+
+/**
+ * The Class NISQuery.
+ */
 public class NISQuery {
 
+	/**
+	 * Find mosaic fee information by NIS.
+	 *
+	 * @param mosaicId the mosaic id
+	 * @return the mosaic fee information
+	 */
 	public static MosaicFeeInformation findMosaicFeeInformationByNIS(MosaicId mosaicId){
 		String queryResult = HttpClientUtils.get(Constants.URL_NAMESPACE_MOSAIC_DEFINITION_PAGE + "?namespace=" + mosaicId.getNamespaceId().toString());
 		JSONObject json = JSONObject.fromObject(queryResult);
