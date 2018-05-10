@@ -15,7 +15,7 @@ Import it as a maven dependency
 ```xml
 <dependency>
     <groupId>io.nem</groupId>
-    <artifactId>nem-transaction-monitor</artifactId>
+    <artifactId>proximax-nem-txn-monitor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 </dependency>
 ```
