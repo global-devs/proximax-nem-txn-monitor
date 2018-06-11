@@ -20,6 +20,7 @@ public class MonitorIncomingTransaction {
 				.subscribe(io.nem.utils.Constants.URL_WS_TRANSACTIONS, new TransactionMonitorHandler())
 				.subscribe(io.nem.utils.Constants.URL_WS_UNCONFIRMED, new CustomTransactionMonitorHandler1())
 				.monitor();
+		
 
 	}
 }
