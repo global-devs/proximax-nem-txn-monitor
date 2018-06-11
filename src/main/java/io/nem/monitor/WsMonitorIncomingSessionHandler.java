@@ -72,7 +72,7 @@ public class WsMonitorIncomingSessionHandler implements StompSessionHandler {
 		for(ChannelHandleModel channelHandleModel: this.channelHandleModels) {
 			session.subscribe(channelHandleModel.getChannel() + "/" + this.address, channelHandleModel.getFrameHandler());
 		}
-
+		
 		//session.subscribe("/transactions/"+this.address, new CustomTransactionMonitorHandler1());
 
 	}

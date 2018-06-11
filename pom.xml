@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.nem</groupId>
 	<artifactId>proximax-nem-txn-monitor</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1.0-beta.1-SNAPSHOT</version>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.2.5.RELEASE</spring.version>
@@ -38,6 +38,80 @@
 			</plugin>
 		</plugins>
 	</build>
+	<distributionManagement>
+		<repository>
+			<uniqueVersion>false</uniqueVersion>
+			<id>nexus</id>
+			<name>proximax nexus release</name>
+			<url>https://nexus.internal.proximax.io/repository/maven-releases/</url>
+		</repository>
+		<snapshotRepository>
+			<uniqueVersion>true</uniqueVersion>
+			<id>nexus</id>
+			<name>proximax nexus snapshot</name>
+			<url>https://nexus.internal.proximax.io/repository/maven-snapshots/</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://unlicense.org</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+
+	<developers>
+		<developer>
+			<name>avanaur</name>
+			<email>tyrone.villaluna@proximax.io</email>
+			<organization>proximax.io</organization>
+			<organizationUrl>https://proximax.io</organizationUrl>
+		</developer>
+		<developer>
+			<name>carlocayos</name>
+			<email>carlo.cayos@proximax.io</email>
+			<organization>proximax.io</organization>
+			<organizationUrl>https://proximax.io</organizationUrl>
+		</developer>
+		<developer>
+			<name>brambear</name>
+			<email>alvin.reyes@proximax.io</email>
+			<organization>proximax.io</organization>
+			<organizationUrl>https://proximax.io</organizationUrl>
+		</developer>
+	</developers>
+
+	<pluginRepositories>
+		<pluginRepository>
+			<id>central</id>
+			<name>Maven Plugin Repository</name>
+			<url>http://repo1.maven.org/maven2</url>
+			<layout>default</layout>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<repositories>
+		<repository>
+			<id>central</id>
+			<name>bintray</name>
+			<url>http://jcenter.bintray.com</url>
+		</repository>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+		<repository>
+			<id>nexus</id>
+			<url>https://nexus.internal.proximax.io/repository/maven-public</url>
+		</repository>
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>commons-beanutils</groupId>
