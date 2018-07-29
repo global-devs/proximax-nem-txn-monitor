@@ -4,6 +4,8 @@
 	<artifactId>proximax-nem-txn-monitor</artifactId>
 	<version>0.1.0-beta.3-SNAPSHOT</version>
 	<url>https://proximax.io</url>
+	<name>proximax-nem-txn-monitor</name>
+	<description>ProximaX NIS1 Transaction Monitor Library</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>4.2.5.RELEASE</spring.version>
