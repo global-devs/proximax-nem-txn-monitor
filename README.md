@@ -6,7 +6,7 @@ Import it as a maven dependency
 
 ```xml
 <dependency>
-    <groupId>io.nem</groupId>
+    <groupId>io.proximax</groupId>
     <artifactId>proximax-nem-txn-monitor</artifactId>
     <version>0.1.0-beta.2</version>
 </dependency>
