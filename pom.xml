@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.proximax</groupId>
 	<artifactId>proximax-nem-txn-monitor</artifactId>
-	<version>0.1.0-beta.2-SNAPSHOT</version>
+	<version>0.1.0-beta.2</version>
 	<url>https://proximax.io</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -22,7 +22,7 @@
 		<connection>scm:git:https://github.com/proximax-storage/proximax-nem-txn-monitor.git</connection>
 		<developerConnection>scm:git:https://github.com/proximax-storage/proximax-nem-txn-monitor.git</developerConnection>
 		<url>ttps://github.com/proximax-storage/proximax-nem-txn-monitor</url>
-		<tag>HEAD</tag>
+		<tag>v0.1.0-beta.2</tag>
 	</scm>
 	<build>
 		<plugins>
