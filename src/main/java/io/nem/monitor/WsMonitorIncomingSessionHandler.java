@@ -11,7 +11,7 @@ import io.nem.model.ChannelHandleModel;
 /**
  * The Class WsMonitorIncomingSessionHandler.
  */
-public class WsMonitorIncomingSessionHandler implements ITransactionMonitor {
+public class WsMonitorIncomingSessionHandler implements IStompSession {
 
     /**
      * The address.
@@ -22,7 +22,9 @@ public class WsMonitorIncomingSessionHandler implements ITransactionMonitor {
      * The channel handle models.
      */
     private List<ChannelHandleModel> channelHandleModels;
-
+    
+    private StompSession session = null;
+    
     /**
      * Instantiates a new ws monitor incoming session handler.
      *
@@ -66,15 +68,14 @@ public class WsMonitorIncomingSessionHandler implements ITransactionMonitor {
      */
     @Override
     public void afterConnected(StompSession session, StompHeaders arg1) {
-        String account = "{\"account\":\"" + this.address + "\"}";
+        this.session = session;
+        String account = "{\"account\":\"" + getAddress() + "\"}";
         System.out.println(account);
         // the address should send to the server before subscribing
         session.send("/w/api/account/get", account);
-
-        for (ChannelHandleModel channelHandleModel : this.channelHandleModels) {
-            session.subscribe(channelHandleModel.getChannel() + "/" + this.address, channelHandleModel.getFrameHandler());
-        }
-
+        for (ChannelHandleModel channelHandleModel : getChannelHandleModels()) {
+            session.subscribe(channelHandleModel.getChannel() + "/" + getAddress(), channelHandleModel.getFrameHandler());
+        }                
         //session.subscribe("/transactions/"+this.address, new CustomTransactionMonitorHandler1());
     }
 
@@ -105,11 +106,29 @@ public class WsMonitorIncomingSessionHandler implements ITransactionMonitor {
     @Override
     public String getAddress() {
         return address;
-    }   
+    }
+
+    @Override
+    public List<ChannelHandleModel> getChannelHandleModels() {
+        return channelHandleModels;        
+    }
 
     @Override
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public void setChannelHandleModels(List<ChannelHandleModel> channelHandleModels) {
+        this.channelHandleModels = channelHandleModels;
+    }
+
+    @Override
+    public void destroy() {
+        this.session.disconnect();
+        getChannelHandleModels().clear();
+        setChannelHandleModels(null);
+        setAddress(null);        
     }
     
 }
