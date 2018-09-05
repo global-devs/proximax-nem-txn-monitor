@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.nem.core.model.NetworkInfos;
 import org.springframework.messaging.converter.StringMessageConverter;
-import org.springframework.messaging.simp.stomp.StompSessionHandler;
 import org.springframework.web.socket.client.WebSocketClient;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.messaging.WebSocketStompClient;
@@ -137,6 +136,8 @@ public class WsNemTransactionMonitor {
          * Monitor.
          */
         void monitor();
+
+        void destroy();
     }
 
     /**
@@ -178,6 +179,11 @@ public class WsNemTransactionMonitor {
          * The channel handle list.
          */
         private List<ChannelHandleModel> channelHandleList = new ArrayList<ChannelHandleModel>();
+
+        /**
+         * Stomp session handler
+         */
+        private IStompSession sessionHandler = null;
 
         /**
          * Instantiates a new builder.
@@ -239,7 +245,6 @@ public class WsNemTransactionMonitor {
          * @param address the address
          */
         private void monitor(String address) {
-            System.out.println("Begin monitor: " + address);
             final String WS_URI = DefaultSetting.getWsUri();
             // create WebSocket client
             List<Transport> transports = new ArrayList<Transport>(1);
@@ -247,11 +252,10 @@ public class WsNemTransactionMonitor {
             WebSocketClient transport = new SockJsClient(transports);
             WebSocketStompClient stompClient = new WebSocketStompClient(transport);
             stompClient.setMessageConverter(new StringMessageConverter());
-            StompSessionHandler handler = new WsMonitorIncomingSessionHandler(address, this.channelHandleList);
-            stompClient.connect(WS_URI, handler);            
+            sessionHandler = new WsMonitorIncomingSessionHandler(address, this.channelHandleList);
+            stompClient.connect(WS_URI, sessionHandler);
             // block and monitor exit action
             ScannerUtil.monitorExit();
-            System.out.println("End monitor address");
         }
 
         /* (non-Javadoc)
@@ -309,6 +313,19 @@ public class WsNemTransactionMonitor {
                 this.addresses.add(address);
             }
             return this;
+        }
+
+        @Override
+        public void destroy() {
+            for (ChannelHandleModel handler : channelHandleList) {
+                this.addresses.remove(handler.getAddress());
+            }
+            this.channelHandleList.clear();
+            this.address = null;
+            if (sessionHandler != null) {
+                sessionHandler.destroy();
+            }
+            ScannerUtil.destroy();
         }
     }
 
