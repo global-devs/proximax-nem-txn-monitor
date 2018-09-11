@@ -22,9 +22,9 @@ public class WsMonitorIncomingSessionHandler implements IStompSession {
      * The channel handle models.
      */
     private List<ChannelHandleModel> channelHandleModels;
-    
+
     private StompSession session = null;
-    
+
     /**
      * Instantiates a new ws monitor incoming session handler.
      *
@@ -75,7 +75,7 @@ public class WsMonitorIncomingSessionHandler implements IStompSession {
         session.send("/w/api/account/get", account);
         for (ChannelHandleModel channelHandleModel : getChannelHandleModels()) {
             session.subscribe(channelHandleModel.getChannel() + "/" + getAddress(), channelHandleModel.getFrameHandler());
-        }                
+        }
         //session.subscribe("/transactions/"+this.address, new CustomTransactionMonitorHandler1());
     }
 
@@ -110,7 +110,7 @@ public class WsMonitorIncomingSessionHandler implements IStompSession {
 
     @Override
     public List<ChannelHandleModel> getChannelHandleModels() {
-        return channelHandleModels;        
+        return channelHandleModels;
     }
 
     @Override
@@ -125,10 +125,12 @@ public class WsMonitorIncomingSessionHandler implements IStompSession {
 
     @Override
     public void destroy() {
-        this.session.disconnect();
+        if (session != null) {
+            session.disconnect();
+        }
         getChannelHandleModels().clear();
         setChannelHandleModels(null);
-        setAddress(null);        
+        setAddress(null);
     }
-    
+
 }
